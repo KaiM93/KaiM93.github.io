@@ -167,12 +167,14 @@
                 <a href="https://app.digit.ink/view-credential/11d4a24d-2cf0-40e4-ae87-d8e4efddea00" class="btn btn2">View Credential</a>
             </div>
             <div class="contact-right"></div>
-                <form name="submit-to-google-sheet">
-                    <input type="text" name="Name" placeholder="Your Name" required>
-                    <input type="email" name="Email" placeholder="Your Email" required>
-                    <textarea name="Message" rows="6" placeholer="Your Message"></textarea>
-                    <button type="submit" class="btn btn2">Submit</button>
-                </form>
+            <form 
+            method="POST" 
+            action="https://script.google.com/macros/s/AKfycbxdU9oOqoXeuvleaClr0xTgjruvVteKFTIL5iGpCvF4vn7cdIOBFqsGdDjdbUyBC0EmlA/exec"
+          >
+            <input name="Email" type="email" placeholder="Email" required>
+            <input name="Name" type="text" placeholder="Name" required>
+            <button type="submit">Send</button>
+          </form>
                 <span id="msg"></span>
         </div>
     </div>
@@ -180,24 +182,5 @@
 <div class="copyright">
     <p>Copyright © Made by Kai Morris</p>
 </div>
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwdocdA3MLl6bD2uYALO1xBsQjYp8UK927mfG7hyXPvQltNMhogQdqNdrYB1zLdw8hSmg/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML = "Message sent successfully"
-            setTimeout(function(){
-                msg.innerHTML = ""
-            },5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
-
     </body>
 </html>
